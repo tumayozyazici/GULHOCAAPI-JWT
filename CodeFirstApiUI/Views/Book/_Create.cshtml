@@ -1,0 +1,26 @@
+﻿@using CodeFirstApiUI.Enums
+@{
+    List<string> genreNames = Enum.GetNames<BookGenre>().ToList();
+}
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Kitap Türü
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <ul class="flex-column">
+                    @foreach (var item in genreNames)
+                    {
+                        <li>
+                            <input id="@item" type="checkbox" name="type" value="@item" />
+                            <label class="form-check-label" for="@item">@item</label>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

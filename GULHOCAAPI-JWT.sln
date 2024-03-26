@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeFirstAPI", "CodeFirstAPI\CodeFirstAPI.csproj", "{7F9017AF-A592-44E1-9337-E23FFF9BFD5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFirstApiUI", "CodeFirstApiUI\CodeFirstApiUI.csproj", "{702400AC-073A-4989-9D5C-FD18AB32C548}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F9017AF-A592-44E1-9337-E23FFF9BFD5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F9017AF-A592-44E1-9337-E23FFF9BFD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F9017AF-A592-44E1-9337-E23FFF9BFD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F9017AF-A592-44E1-9337-E23FFF9BFD5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{702400AC-073A-4989-9D5C-FD18AB32C548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{702400AC-073A-4989-9D5C-FD18AB32C548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{702400AC-073A-4989-9D5C-FD18AB32C548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{702400AC-073A-4989-9D5C-FD18AB32C548}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCD5BABC-E155-4A3A-A3B7-DEE5F05A8FF6}
+	EndGlobalSection
+EndGlobal
