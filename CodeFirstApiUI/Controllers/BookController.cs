@@ -50,9 +50,10 @@ namespace CodeFirstApiUI.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Baslik = "Create";
             BookCreateVM createVM = new BookCreateVM();
             createVM.Authors = FillAuthors();
-            return View(createVM);
+            return PartialView("_Create", createVM);
         }
 
         private List<SelectListItem> FillAuthors()
@@ -107,5 +108,77 @@ namespace CodeFirstApiUI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            ViewBag.Baslik = "Update";
+            BookCreateVM createVm;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseAdress);
+                var responseBook = client.GetAsync($"BookDetail?id={id}");
+                responseBook.Wait();
+                if (responseBook.IsCompletedSuccessfully)
+                {
+                    var readBook = responseBook.Result.Content.ReadFromJsonAsync<BookCreateVM>();
+                    readBook.Wait();
+                    createVm = readBook.Result;
+
+                    createVm.Authors = FillAuthors();
+                    return PartialView("_Create",createVm);
+                }
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult Update(IFormCollection collection)
+        {
+
+                BookCreateVM bookCreateVM = new BookCreateVM()
+                {
+                    Name = collection["Name"],
+                    Author = collection["Author"],
+                    Genres = collection["type"].ToList()
+                };
+
+                try
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(baseAdress);
+                        var response = client.PutAsJsonAsync("UpdateBook", bookCreateVM);
+                        response.Wait();
+                        if (response.IsCompletedSuccessfully)
+                        {
+                            return RedirectToAction(nameof(Index));
+                        }
+                    return View(bookCreateVM);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseAdress);
+                var response = client.DeleteAsync($"DeleteBook?id={id}");
+                response.Wait();
+                if (response.IsCompletedSuccessfully)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return BadRequest();
+        }
     }
 }
+

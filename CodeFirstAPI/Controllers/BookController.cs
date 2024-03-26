@@ -46,6 +46,11 @@ namespace CodeFirstAPI.Controllers
                 BookDTO bookDto = new BookDTO { Id = book.Id, Name = book.Name };
                 AuthorBook authorBook = db.AuthorBooks.FirstOrDefault(x => x.BookId == book.Id);
 
+                bookDto.Genres = db.Genres.Join(db.BookGenres, x => x.Id, y => y.GenreId, (x, y) => new { Genres = x, BookGenres = y })
+                    .Where(x => x.BookGenres.BookId == book.Id)
+                    .Select(x => x.Genres.Name).ToList();
+
+
                 bookDto.Author = db.Authors.FirstOrDefault(x => x.Id == authorBook.AuthorId).FirstName;
                 return Ok(bookDto);
             }

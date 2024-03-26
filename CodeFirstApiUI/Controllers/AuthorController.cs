@@ -123,7 +123,7 @@ namespace CodeFirstApiUI.Controllers
             return View(authorVM);
         }
 
-        [HttpDelete]
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             using (var client = new HttpClient())
