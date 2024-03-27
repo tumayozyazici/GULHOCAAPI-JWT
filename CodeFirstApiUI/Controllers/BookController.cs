@@ -140,7 +140,8 @@ namespace CodeFirstApiUI.Controllers
                 {
                     Name = collection["Name"],
                     Author = collection["Author"],
-                    Genres = collection["type"].ToList()
+                    Genres = collection["type"].ToList(),
+                    Id = 
                 };
 
                 try
