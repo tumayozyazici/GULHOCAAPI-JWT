@@ -1,6 +1,7 @@
 ﻿using CodeFirstAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Security.Principal;
 
 namespace CodeFirstAPI.Context
 {
@@ -10,6 +11,7 @@ namespace CodeFirstAPI.Context
         {
         }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<AuthorBook> AuthorBooks { get; set; }
         public DbSet<Book> Books { get; set; }

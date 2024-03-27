@@ -111,16 +111,16 @@ namespace CodeFirstAPI.Controllers
 
             List<string> names = bookCreateDTO.Genres.Where(x => !genreName.Contains(x)).ToList();
 
-            List<BookGenre> toBeDeleted = db.BookGenres.Where(x=>x.BookId ==bookCreateDTO.Id).ToList();
+            List<BookGenre> toBeDeleted = db.BookGenres.Where(x => x.BookId == bookCreateDTO.Id).ToList();
 
-            if (toBeDeleted.Count>0)
+            if (toBeDeleted.Count > 0)
             {
                 foreach (var item in toBeDeleted)
                 {
                     db.BookGenres.Remove(item);
                 }
             }
-            
+
 
             foreach (var item in names)
             {
