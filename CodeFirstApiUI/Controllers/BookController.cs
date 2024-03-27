@@ -141,7 +141,7 @@ namespace CodeFirstApiUI.Controllers
                     Name = collection["Name"],
                     Author = collection["Author"],
                     Genres = collection["type"].ToList(),
-                    Id = 
+                    Id = Convert.ToInt32(collection["id"])
                 };
 
                 try

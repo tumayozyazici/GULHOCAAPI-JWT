@@ -111,6 +111,17 @@ namespace CodeFirstAPI.Controllers
 
             List<string> names = bookCreateDTO.Genres.Where(x => !genreName.Contains(x)).ToList();
 
+            List<BookGenre> toBeDeleted = db.BookGenres.Where(x=>x.BookId ==bookCreateDTO.Id).ToList();
+
+            if (toBeDeleted.Count>0)
+            {
+                foreach (var item in toBeDeleted)
+                {
+                    db.BookGenres.Remove(item);
+                }
+            }
+            
+
             foreach (var item in names)
             {
                 Genre genre = new Genre()
@@ -136,16 +147,16 @@ namespace CodeFirstAPI.Controllers
 
         [HttpPut]
         [Route("UpdateBook")]
-        public IActionResult Update(BookDTO bookDTO)
+        public IActionResult Update(BookCreateDTO bookCreateDTO)
         {
-            Book book = db.Books.FirstOrDefault(x => x.Id == bookDTO.Id);
+            Book book = db.Books.FirstOrDefault(x => x.Id == bookCreateDTO.Id);
             if (book is null)
                 return NotFound();
             try
             {
-                book.Name = bookDTO.Name;
-
-                Author author = db.Authors.FirstOrDefault(x => x.FirstName.ToLower() == bookDTO.Author.ToLower());
+                book.Name = bookCreateDTO.Name;
+                ExistOrCreateGenre(bookCreateDTO, book);
+                Author author = db.Authors.FirstOrDefault(x => x.FirstName.ToLower() == bookCreateDTO.Author.ToLower());
 
                 if (author is not null)
                 {
@@ -153,7 +164,6 @@ namespace CodeFirstAPI.Controllers
 
                     authorBook.Book = book;
                     authorBook.Author = author;
-
                     db.SaveChanges();
 
                     return Ok(book);

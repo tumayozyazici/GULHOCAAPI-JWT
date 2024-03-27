@@ -2,6 +2,7 @@
 {
     public class BookCreateDTO :BookBaseDTO
     {
+        public int Id { get; set; }
         public BookCreateDTO()
         {
             Genres = new List<string>();
